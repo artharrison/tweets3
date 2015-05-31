@@ -13,12 +13,6 @@ end
 get "/tweets.css" do
   content_type "text/css"
   tweets = twitter.search(ENV.fetch("TWITTER_SEARCH_STRING"))
-  '
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-      .tweet .copy:before {
-         white-space: pre-wrap;
-      }
-  '
   tweets.take(15).map.with_index do |tweet, i|
   '   
   #tweet-#{i + 1} .avatar {
@@ -38,7 +32,4 @@ get "/tweets.css" do
   }
     '
   end
-   '
-      }
-  '
 end
