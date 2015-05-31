@@ -13,14 +13,14 @@ end
 get "/tweets.css" do
   content_type "text/css"
   tweets = twitter.search(ENV.fetch("TWITTER_SEARCH_STRING"))
-  <<-CSS
+  '
   @media screen and (-webkit-min-device-pixel-ratio: 0) {
       .tweet .copy:before {
          white-space: pre-wrap;
       }
-  CSS
+  '
   tweets.take(15).map.with_index do |tweet, i|
-  <<-CSS    
+  '   
   #tweet-#{i + 1} .avatar {
     background: url("#{tweet.user.profile_image_url}");
   }
@@ -36,9 +36,9 @@ get "/tweets.css" do
   #tweet-#{i + 1} .timestamp::after {
     content: "#{tweet.created_at}";
   }
-    CSS
+    '
   end
-   <<-CSS
+   '
       }
-  CSS
+  '
 end
